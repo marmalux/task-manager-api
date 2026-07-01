@@ -23,3 +23,7 @@ This API was deplyed in an Oracle Cloud Infraestructure compute instance, using 
 
 **Swagger execution**
 ![Running Swagger](https://github.com/marmalux/task-manager-api/blob/main/images/swager.jpg)
+
+**Oracle Cloud Infraestructure**
+
+![virtual machine configuration](images/instance.png)
