@@ -14,3 +14,12 @@ Oracle Linux compute instance
 * Uvicorn
 * Pydantic
 * Oracle Linux
+
+## Deployment
+This API was deplyed in an Oracle Cloud Infraestructure compute instance, using Oracle Linux Virtual Machine. The application is served using Uvicorn and can be accecessed through VM public IP. The network access is configured using a VCN with Security List allowing HTTP trafic in port 8000.
+
+**Basic Infraestructure**
+![Basic infraestructure](https://github.com/marmalux/task-manager-api/blob/main/images/basic_infraestructure.jpg)
+
+**Swagger execution**
+![Running Swagger](https://github.com/marmalux/task-manager-api/blob/main/images/swager.jpg)
