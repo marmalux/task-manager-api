@@ -1,0 +1,7 @@
+__pycache__/
+.venv/
+ejercicio_api/
+Wallet/
+main1.py
+.env
+.gitignore
