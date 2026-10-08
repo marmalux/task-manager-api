@@ -16,8 +16,10 @@ Oracle Linux compute instance
 
 ## Technologies
 
-* Oracle Cloud Infrastructure
+* OCI - Oracle Autonomous Database
 * Python
+* Docker
+* Swagger
 * FastAPI
 * Uvicorn
 * Pydantic
@@ -36,21 +38,78 @@ This API was deployed in an Oracle Cloud Infrastructure compute instance, using 
 
 ![virtual machine configuration](images/instance.png)
 
-## Installation
-First, in VM instance we create a Virtual Environment with Python
+## Docker
+
+This proyect can be excecuted inside a Docker container.
+
+Docker is used to:
+
+* Package the Python application and its dependencies.
+* Provide a consistent execution environment.
+* Include the required Oracle client configuration.
+* Run the FastAPI application using Uvicorn.
+
+In this case I used the Database Wallet to connect with Database and include **Thick** client for Oracle.
+
+Swagger documentation can be acceded at
+
+http://127.0.0.1:8000/docs
+
+## Security considerations
+
+### SQL Params
+
+This app uses parametrized SQL queries with Oracle bind variables
 ```
-python -m venv .venv
-source .venv/bin/activate
+cursor.execute(
+    """ SELECT * FROM TAREAS WHERE TAREA_ID = :tareaid """, 
+    { "tareaid": tarea_id } 
+    )
 ```
-Install the project dependences
+
+Bind varibles prevent the user input as part of SQL query and protect the app against **SQL inyection**.
+
+
+## Running project
+### Local
+
+Install the project dependencies:
+
 ```
 pip install -r requirements.txt
 ```
-Run the app
+
+Run the API:
 ```
-uvicorn main:app --host 0.0.0.0 --port 8000
+uvicorn main:app --reload
 ```
 
-## Docker
+Then open Swagger documentation:
 
-This proyect can be excecuted by Docker
+http://localhost:8000/docs
+
+### Docker
+
+Create Docker image
+```
+Docker build -t task-manager-api .
+```
+Run the container
+```
+Docker run --env-file .env
+```
+
+Database credential must be provided according to the project's enviroment configuration. Sensitive information such a Oracle Wallet not inlcuded in the repository
+
+## Cloud enviroment
+
+The database used was hosted on Oracle Cloud Infrastructure (OCI) using Oracle Autonomous Database.
+
+This project provided hands-on experience with:
+
+Cloud database connectivity
+Oracle Wallet configuration
+OCI resources
+API deployment concepts
+Docker containerization
+Secure handling of database credentials
